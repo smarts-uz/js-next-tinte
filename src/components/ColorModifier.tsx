@@ -2,29 +2,44 @@
 
 import React, { useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { useTheme } from "next-themes";
 
 const colorKeys = {
-  base: ["background", "foreground"],
-  brand: [
-    "primary",
-    "primary-foreground",
-    "secondary",
-    "secondary-foreground",
-    "destructive",
-    "destructive-foreground",
-    "accent",
-    "accent-foreground",
-  ],
-  other: [
-    "border",
-    "input",
-    "ring",
-    "muted",
-    "muted-foreground",
+  base: [
+    "background",
+    "foreground",
     "card",
     "card-foreground",
     "popover",
     "popover-foreground",
+  ],
+  primary: [
+    "primary",
+    "primary-foreground",
+    "secondary",
+    "secondary-foreground",
+  ],
+  states: [
+    "muted",
+    "muted-foreground",
+    "accent",
+    "accent-foreground",
+    "destructive",
+    "border",
+    "input",
+    "ring",
+  ],
+  charts: ["chart-1", "chart-2", "chart-3", "chart-4", "chart-5"],
+  sidebar: [
+    "sidebar",
+    "sidebar-foreground",
+    "sidebar-primary",
+    "sidebar-primary-foreground",
+    "sidebar-accent",
+    "sidebar-accent-foreground",
+    "sidebar-border",
+    "sidebar-ring",
   ],
 } as const;
 
@@ -32,18 +47,34 @@ const toVarName = (key: string) => `--${key}`;
 
 const ColorSettings: React.FC = () => {
   const [values, setValues] = useState<Record<string, string>>({});
+  const { theme } = useTheme();
 
   useEffect(() => {
-    const rootStyles = getComputedStyle(document.documentElement);
-    const initial: Record<string, string> = {};
-    Object.values(colorKeys)
-      .flat()
-      .forEach((key) => {
-        initial[key] =
-          rootStyles.getPropertyValue(toVarName(key)).trim() || "#000000";
-      });
-    setValues(initial);
-  }, []);
+    // Wait for the DOM to be fully rendered to get computed styles
+    const loadColorValues = () => {
+      const rootStyles = getComputedStyle(document.documentElement);
+      const initial: Record<string, string> = {};
+      Object.values(colorKeys)
+        .flat()
+        .forEach((key) => {
+          initial[key] =
+            rootStyles.getPropertyValue(toVarName(key)).trim() || "#000000";
+        });
+      setValues(initial);
+    };
+
+    // Initial load
+    loadColorValues();
+
+    // Re-load when theme changes
+    const observer = new MutationObserver(loadColorValues);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, [theme]);
 
   const handleChange = (key: string, color: string) => {
     document.documentElement.style.setProperty(toVarName(key), color);
@@ -52,24 +83,24 @@ const ColorSettings: React.FC = () => {
 
   const renderColorPicker = (key: string) => (
     <div key={key} className="flex items-center space-x-2 mb-2">
-      <label htmlFor={key} className="w-32 text-xs capitalize">
+      <Label htmlFor={key} className="w-48 text-xs capitalize">
         {key.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
-      </label>
+      </Label>
       <input
         type="color"
         id={key}
         value={values[key] || "#000000"}
         onChange={(e) => handleChange(key, e.target.value)}
-        className="h-6 w-6 p-0 border-none"
+        className="h-8 w-8 p-0 border-none rounded"
       />
-      <span className="text-xs font-mono">{values[key]}</span>
+      <span className="text-xs font-mono w-20">{values[key]}</span>
     </div>
   );
 
   return (
-    <div className="space-y-4 flex w-full  gap-4">
+    <div className="w-full grid grid-cols-3 gap-2">
       {Object.entries(colorKeys).map(([category, keys]) => (
-        <Card key={category} className="w-full h-96">
+        <Card key={category} className="w-full">
           <CardHeader>
             <CardTitle className="text-base">
               {category.charAt(0).toUpperCase() + category.slice(1)} Colors

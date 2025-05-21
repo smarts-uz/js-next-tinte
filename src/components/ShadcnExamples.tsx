@@ -213,7 +213,7 @@ export function ShadcnExamples() {
           </div>
         </TabsContent>
 
-        <TabsContent value="data" className="space-y-6 pt-4">
+        <TabsContent value="data" className="space-y-6 pt-4 ">
           <h2 className="text-xl font-semibold">Accordion</h2>
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">

@@ -9,18 +9,23 @@ import { Slider } from "@/components/ui/slider";
 type SpacingSettingsProps = {
   initialSpacing?: number;
   initialLetterSpacing?: number;
+  initialBorderRadius?: number;
   onSpacingChange?: (spacing: number) => void;
   onLetterSpacingChange?: (letterSpacing: number) => void;
+  onBorderRadiusChange?: (borderRadius: number) => void;
 };
 
 const SpacingSettings: React.FC<SpacingSettingsProps> = ({
   initialSpacing = 0.25,
   initialLetterSpacing = 0.0625,
+  initialBorderRadius = 0.25,
   onSpacingChange,
   onLetterSpacingChange,
+  onBorderRadiusChange,
 }) => {
   const [spacing, setSpacing] = useState(initialSpacing);
   const [letterSpacing, setLetterSpacing] = useState(initialLetterSpacing);
+  const [borderRadius, setBorderRadius] = useState(initialBorderRadius);
 
   useEffect(() => {
     // Get initial spacing from root styles on component mount
@@ -31,8 +36,12 @@ const SpacingSettings: React.FC<SpacingSettingsProps> = ({
     const initialLetterSpacingValue = parseFloat(
       rootStyles.getPropertyValue("--letter-spacing").trim()
     );
+    const initialBorderRadiusValue = parseFloat(
+      rootStyles.getPropertyValue("--radius").trim()
+    );
     setSpacing(initialSpacingValue);
     setLetterSpacing(initialLetterSpacingValue);
+    setBorderRadius(initialBorderRadiusValue);
   }, []);
 
   const handleSpacingChange = (value: number) => {
@@ -57,12 +66,23 @@ const SpacingSettings: React.FC<SpacingSettingsProps> = ({
     // Optional callback if provided
     onLetterSpacingChange?.(value);
   };
+
+  const handleBorderRadiusChange = (value: number) => {
+    setBorderRadius(value);
+
+    // Update CSS variables for border radius
+    document.documentElement.style.setProperty("--radius", `${value}rem`);
+
+    // Optional callback if provided
+    onBorderRadiusChange?.(value);
+  };
+
   return (
     <div className="space-y-4 flex w-full gap-4">
       <Card className="w-full">
         <CardHeader className="py-2">
           <CardTitle className="text-base">
-            Global Spacing & Letter Spacing Modifier
+            Global Spacing, Letter Spacing & Border Radius Modifier
           </CardTitle>
         </CardHeader>
         <CardContent className="py-2">
@@ -134,6 +154,42 @@ const SpacingSettings: React.FC<SpacingSettingsProps> = ({
               max={1}
               step={0.05}
               onValueChange={(values) => handleLetterSpacingChange(values[0])}
+              className="py-1"
+            />
+          </div>
+
+          <div className="mb-3">
+            <div className="mb-1.5 flex items-center justify-between">
+              <Label
+                htmlFor="global-radius-slider"
+                className="text-lg text-foreground dark:text-white font-medium"
+              >
+                Border Radius
+              </Label>
+              <div className="flex items-center gap-2">
+                <Input
+                  id="global-radius-input"
+                  type="number"
+                  value={borderRadius}
+                  onChange={(e) => {
+                    const newValue = Number(e.target.value);
+                    handleBorderRadiusChange(newValue);
+                  }}
+                  min={0}
+                  max={1}
+                  step={0.05}
+                  className="h-6 w-24 px-2 text-xs"
+                />
+                <span className="text-muted-foreground text-xs">rem</span>
+              </div>
+            </div>
+            <Slider
+              id="global-radius-slider"
+              value={[borderRadius]}
+              min={0}
+              max={1}
+              step={0.05}
+              onValueChange={(values) => handleBorderRadiusChange(values[0])}
               className="py-1"
             />
           </div>

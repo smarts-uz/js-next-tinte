@@ -13,6 +13,7 @@ export default function ThemesProviders({
       defaultTheme="system"
       enableSystem
       disableTransitionOnChange
+      storageKey="theme-preference"
     >
       {children}
     </ThemeProvider>
