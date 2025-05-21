@@ -163,8 +163,14 @@
   --blur: 4px;
   --backdrop-blur: 4px;
 }
+
 body {
   letter-spacing: var(--letter-spacing);
+  font-family: var(--font-sans);
+}
+
+html, button, input, select, textarea {
+  font-family: var(--font-sans);
 }
 
 @layer base {
