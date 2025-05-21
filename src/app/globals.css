@@ -78,6 +78,14 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --destructive-foreground: hsl(0 0% 100%);
+  --shadow-color: oklch(0.3 0.0891 19.6);
+  --shadow-opacity: 0.08;
+  --shadow-blur: 3px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 0;
+  --shadow-offset-y: 1px;
+  --letter-spacing: 0em;
+  --spacing: 0.25rem;
 }
 
 .dark {
@@ -113,6 +121,17 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
   --destructive-foreground: hsl(0 0% 10%);
+  --shadow-color: oklch(0.3 0.0891 19.6);
+  --shadow-opacity: 0.08;
+  --shadow-blur: 3px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 0;
+  --shadow-offset-y: 1px;
+  --letter-spacing: 0em;
+  --spacing: 0.25rem;
+}
+body {
+  letter-spacing: var(--letter-spacing);
 }
 
 @layer base {
@@ -121,5 +140,19 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  pre {
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 5px;
+    }
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
   }
 }

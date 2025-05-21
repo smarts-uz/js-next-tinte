@@ -71,7 +71,7 @@ export function ShadcnExamples() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-8">
+    <div className="min-h-[50vh] mt-6">
       <h1 className="text-3xl font-bold tracking-tight">
         Shadcn UI Components
       </h1>
@@ -111,7 +111,6 @@ export function ShadcnExamples() {
             <Button size="icon">
               <Info className="h-4 w-4" />
             </Button>
-            s
           </div>
         </TabsContent>
 
