@@ -81,6 +81,18 @@ const ColorSettings: React.FC = () => {
     setValues((prev) => ({ ...prev, [key]: color }));
   };
 
+  const formatColor = (color: string) => {
+    // If color is in shorthand format (e.g., #fd0), expand to full format
+    if (/^#([0-9a-f]{3})$/i.test(color)) {
+      return color
+        .split("")
+        .map((char) => char + char)
+        .join("")
+        .replace("##", "#");
+    }
+    return color;
+  };
+
   const renderColorPicker = (key: string) => (
     <div key={key} className="flex items-center space-x-2 mb-2">
       <Label htmlFor={key} className="w-48 text-xs capitalize">
@@ -89,11 +101,11 @@ const ColorSettings: React.FC = () => {
       <input
         type="color"
         id={key}
-        value={values[key] || "#000000"}
+        value={formatColor(values[key] || "#000000")}
         onChange={(e) => handleChange(key, e.target.value)}
         className="h-8 w-8 p-0 border-none rounded"
       />
-      <span className="text-xs font-mono w-20">{values[key]}</span>
+      <span className="text-xs font-mono w-20">{formatColor(values[key])}</span>
     </div>
   );
 
