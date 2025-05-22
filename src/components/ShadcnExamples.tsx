@@ -42,6 +42,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export function ShadcnExamples() {
   const [email, setEmail] = useState("");
@@ -82,7 +91,7 @@ export function ShadcnExamples() {
       <Separator className="my-6" />
 
       <Tabs defaultValue="buttons" className="w-full">
-        <TabsList className="grid w-full grid-cols-7">
+        <TabsList className="grid w-full grid-cols-8">
           <TabsTrigger value="buttons">Buttons</TabsTrigger>
           <TabsTrigger value="forms">Forms</TabsTrigger>
           <TabsTrigger value="cards">Cards</TabsTrigger>
@@ -90,6 +99,7 @@ export function ShadcnExamples() {
           <TabsTrigger value="feedback">Feedback</TabsTrigger>
           <TabsTrigger value="login">Login</TabsTrigger>
           <TabsTrigger value="tables">Tables</TabsTrigger>
+          <TabsTrigger value="modals">Modals</TabsTrigger>
         </TabsList>
 
         <TabsContent value="buttons" className="space-y-4 pt-4">
@@ -110,6 +120,36 @@ export function ShadcnExamples() {
             <Button size="lg">Large</Button>
             <Button size="icon">
               <Info className="h-4 w-4" />
+            </Button>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="modals" className="space-y-6 pt-4">
+          <h2 className="text-xl font-semibold">Dialog Examples</h2>
+          <div className="space-y-4">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button>Open Basic Dialog</Button>
+              </DialogTrigger>
+
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Basic Dialog</DialogTitle>
+                  <DialogDescription>
+                    This is a basic dialog example with a title and description.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="py-4">
+                  <p>Dialog content goes here.</p>
+                </div>
+                <DialogFooter>
+                  <Button variant="outline">Cancel</Button>
+                  <Button>Confirm</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+            <Button variant="outline" className="blur">
+              Blurss
             </Button>
           </div>
         </TabsContent>

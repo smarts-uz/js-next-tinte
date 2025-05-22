@@ -51,14 +51,14 @@ const FontModifier = () => {
       "--font-sans",
       fonts[selectedFont]
     );
-    
+
     // Force update CSS variables
     document.body.style.fontFamily = fonts[selectedFont];
-    
+
     // Store the selection in localStorage for persistence
     localStorage.setItem("selectedFont", selectedFont);
   }, [selectedFont]);
-  
+
   // Load saved font preference on initial render
   useEffect(() => {
     const savedFont = localStorage.getItem("selectedFont") as FontName;

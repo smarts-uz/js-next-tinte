@@ -108,8 +108,6 @@
   --destructive-foreground: hsl(0, 0%, 100%);
   --letter-spacing: 0em;
   --spacing: 0.25rem;
-  --blur: 4px;
-  --backdrop-blur: 4px;
 }
 
 .dark {
@@ -147,8 +145,6 @@
   --destructive-foreground: hsl(0, 0%, 10%);
   --letter-spacing: 0em;
   --spacing: 0.25rem;
-  --blur: 4px;
-  --backdrop-blur: 4px;
 }
 
 body {

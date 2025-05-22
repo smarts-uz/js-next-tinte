@@ -2,10 +2,10 @@
 
 import { ShadcnExamples } from "@/components/ShadcnExamples";
 import ColorModifier from "@/components/ColorModifier";
-import SizeModifier from "@/components/SizeModifier";
+import GlobalModifier from "@/components/GlobalModifier";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import ShadowModifier from "@/components/ShadowsModifier";
-import FontModifier from "@/components/FontsExamples";
+import FontModifier from "@/components/FontsModifier";
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
         <Tabs defaultValue="colors" className="w-full">
           <TabsList className="w-full flex">
             <TabsTrigger value="colors">Colors</TabsTrigger>
-            <TabsTrigger value="sizes">Sizes</TabsTrigger>
+            <TabsTrigger value="sizes">Global</TabsTrigger>
             <TabsTrigger value="shadows">Shadows</TabsTrigger>
             <TabsTrigger value="fonts">Fonts</TabsTrigger>
           </TabsList>
@@ -22,7 +22,7 @@ export default function Home() {
             <ColorModifier />
           </TabsContent>
           <TabsContent value="sizes">
-            <SizeModifier />
+            <GlobalModifier />
           </TabsContent>
           <TabsContent value="shadows">
             <ShadowModifier />
