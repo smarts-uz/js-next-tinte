@@ -31,15 +31,16 @@ const UNITS = {
   "shadow-offset-x": "px",
   "shadow-offset-y": "px",
 };
+
 const SHADOW_VARIANTS = [
-  { name: "2xs", multiplier: 1 },
-  { name: "xs", multiplier: 1.2 },
-  { name: "sm", multiplier: 1.4 },
-  { name: "", multiplier: 1.6 },
-  { name: "md", multiplier: 1.8 },
+  { name: "2xs", multiplier: 0.5 },
+  { name: "xs", multiplier: 0.75 },
+  { name: "sm", multiplier: 1 },
+  { name: "", multiplier: 1.25 },
+  { name: "md", multiplier: 1.5 },
   { name: "lg", multiplier: 2 },
-  { name: "xl", multiplier: 2.2 },
-  { name: "2xl", multiplier: 2.4 },
+  { name: "xl", multiplier: 2.5 },
+  { name: "2xl", multiplier: 3 },
 ];
 
 // Color conversion utilities
@@ -114,13 +115,24 @@ const updateShadows = (values: Record<string, string>) => {
     Object.entries(DEFAULT_VALUES).map(([k, v]) => [k, values[k] || v])
   );
 
-  const base = `${x} ${y} ${blur} ${spread}`;
   SHADOW_VARIANTS.forEach(({ name, multiplier }) => {
     const varName = `--shadow${name ? "-" + name : ""}`;
-    const finalOpacity = Math.max(
-      0,
-      Math.min(1, parseFloat(opacity) * multiplier)
-    );
+
+    // Apply multiplier to numeric values
+    const xNum = parseFloat(x);
+    const yNum = parseFloat(y);
+    const blurNum = parseFloat(blur);
+    const spreadNum = parseFloat(spread);
+    const opacityNum = parseFloat(opacity);
+
+    const finalX = `${xNum * multiplier}px`;
+    const finalY = `${yNum * multiplier}px`;
+    const finalBlur = `${blurNum * multiplier}px`;
+    const finalSpread = `${spreadNum * multiplier}px`;
+    const finalOpacity = Math.max(0, Math.min(1, opacityNum * multiplier));
+
+    const base = `${finalX} ${finalY} ${finalBlur} ${finalSpread}`;
+
     document.documentElement.style.setProperty(
       varName,
       `${base} hsla(${color}, ${finalOpacity})`
