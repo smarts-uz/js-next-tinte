@@ -43,16 +43,14 @@
   --radius-xl: calc(var(--radius) + 4px);
   --color-destructive-foreground: var(--destructive-foreground);
 
-  /* Computed Shadow Variants */
-  /* Apply the shadow values to the shadow- prefix */
-  --shadow-2xs: 0 0.5px 1.5px 0 hsla(0, 0%, 90%, 0.24);
-  --shadow-xs: 0 0.7px 2.1px 0 hsla(0, 0%, 90%, 0.29);
-  --shadow-sm: 0 0.85px 2.55px 0 hsla(0, 0%, 90%, 0.34);
-  --shadow: 0 1px 3px 0 hsla(0, 0%, 90%, 0.48);
-  --shadow-md: 0 1.2px 4.5px 0 hsla(0, 0%, 90%, 0.58);
-  --shadow-lg: 0 1.5px 6px 0 hsla(0, 0%, 90%, 0.72);
-  --shadow-xl: 0 2px 9px 0 hsla(0, 0%, 90%, 0.86);
-  --shadow-2xl: 0 2.5px 12px 0 hsla(0, 0%, 90%, 0.95);
+  --shadow-2xs: var(--shadow-2xs);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
 
   /* Letter Spacing */
   --tracking-tighter: calc(var(--letter-spacing) - 0.05em);
@@ -108,12 +106,6 @@
   --sidebar-border: hsl(0, 0%, 90%);
   --sidebar-ring: hsl(0, 0%, 60%);
   --destructive-foreground: hsl(0, 0%, 100%);
-  --shadow-color: hsl(0, 0%, 90%);
-  --shadow-opacity: 0.48;
-  --shadow-blur: 3px;
-  --shadow-spread: 2px;
-  --shadow-offset-x: 2px;
-  --shadow-offset-y: 1px;
   --letter-spacing: 0em;
   --spacing: 0.25rem;
   --blur: 4px;
@@ -153,12 +145,6 @@
   --sidebar-border: hsl(0, 0%, 10%);
   --sidebar-ring: hsl(0, 0%, 50%);
   --destructive-foreground: hsl(0, 0%, 10%);
-  --shadow-color: hsl(0, 0%, 30%);
-  --shadow-opacity: 0.08;
-  --shadow-blur: 3px;
-  --shadow-spread: 0px;
-  --shadow-offset-x: 0;
-  --shadow-offset-y: 1px;
   --letter-spacing: 0em;
   --spacing: 0.25rem;
   --blur: 4px;
